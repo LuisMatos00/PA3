@@ -1,95 +1,134 @@
-// 1.5 JavaScript Básico: valores, tipos, operadores, estructuras de control
-console.log("Cargando sistema de matrícula...");
+// 1.5 JavaScript Básico: valores, tipos, operadores y estructuras de control
+// js/cursos.js
 
-const cursosDisponibles = [
-  "Matemática 1",
-  "Matemática 2",
-  "Programación",
-  "Base de Datos",
-  "Física",
-  "Programación Web",
-  "Estructura de Datos"
-];
+document.addEventListener('DOMContentLoaded', () => {
+  const formulario = document.getElementById('formulario-matricula');
+  const lista = document.getElementById('lista-cursos');
+  const mensajeError = document.getElementById('mensaje-error');
+  const campoHorario = document.getElementById('horario');
+  const campoCurso = document.getElementById('curso');
+  const campoDocente = document.getElementById('docente');
+  const cursosSeleccionados = [];
 
-// 1.6 Funciones y funciones de flecha
-function crearCurso(nombre, horario, docente) {
-  return { nombre, horario, docente };
-}
+  // Diccionario de cursos y docentes
+  const docentesPorCurso = {
+    "Matemática 1": ["JUAN DOMINGUEZ", "ALBERTH ANSTAIN"],
+    "Matemática 2": ["ALBERTH ANSTAIN"],
+    "Programación": ["LUIS ESPINOZA"],
+    "Base de Datos": ["JUAN CARLOS ORTIZ"],
+    "Física": ["CHRISTIAN ALONSO VEGA"],
+    "Programación Web": ["CHRISTIAN ALONSO VEGA"],
+    "Estructura de Datos": ["CRISTIAN RONALDO"]
+  };
 
-const agregarCursoALista = (curso) => {
-  const lista = document.getElementById("lista-cursos");
-  const item = document.createElement("li");
-  item.textContent = `Curso: ${curso.nombre}, Horario: ${curso.horario}, Docente: ${curso.docente}`;
-  lista.appendChild(item);
-};
-
-// Función recursiva para contar cursos
-function contarCursos(elemento, contador = 0) {
-  if (!elemento.nextElementSibling) return contador + 1;
-  return contarCursos(elemento.nextElementSibling, contador + 1);
-}
-
-// Clase con métodos, encapsulamiento y prototipos
-class Matricula {
-  #cursos = [];
-
-  agregar(curso) {
-    this.#cursos.push(curso);
-    agregarCursoALista(curso);
-  }
-
-  listar() {
-    return this.#cursos;
-  }
-}
-
-// Polimorfismo con clases
-class CursoOnline extends Matricula {
-  agregar(curso) {
-    curso.modalidad = "Virtual";
-    super.agregar(curso);
-  }
-}
-
-const matricula = new CursoOnline();
-
-// 1.7 Eventos y DOM
-window.onload = () => {
-  const form = document.getElementById("formulario-matricula");
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const nombre = document.getElementById("nombre").value;
-    const cursoNombre = document.getElementById("curso").value;
-    const horario = document.getElementById("horario").value;
-    const docente = document.getElementById("docente").value;
-
-    const nuevoCurso = crearCurso(cursoNombre, horario, docente);
-    matricula.agregar(nuevoCurso);
-
-    alert(`Curso matriculado por ${nombre}`);
+  // Actualizar docentes según curso seleccionado
+  campoCurso.addEventListener('change', () => {
+    const cursoSeleccionado = campoCurso.value;
+    const docentes = docentesPorCurso[cursoSeleccionado] || [];
+    campoDocente.innerHTML = '';
+    docentes.forEach(docente => {
+      const opcion = document.createElement('option');
+      opcion.value = docente;
+      opcion.textContent = docente;
+      campoDocente.appendChild(opcion);
+    });
   });
 
-  // Evento de teclado
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      alert("Has presionado Escape. Cancelando...");
+  // 1.6 Funciones: definición, argumentos, funciones de flecha y recursivas
+  const agregarCurso = (nombre, codigo, carrera, ciclo, curso, horario, docente) => {
+    const objetoCurso = {
+      nombre,
+      codigo,
+      carrera,
+      ciclo,
+      curso,
+      horario,
+      docente,
+      mostrar() {
+        return `${this.nombre} (${this.codigo}) - ${this.carrera}, ciclo ${this.ciclo}: ${this.curso} (${this.horario}) con ${this.docente}`;
+      }
+    };
+
+    cursosSeleccionados.push(objetoCurso);
+    actualizarLista();
+  };
+
+  const actualizarLista = () => {
+    lista.innerHTML = '';
+    cursosSeleccionados.forEach((c) => {
+      const item = document.createElement('li');
+      item.textContent = c.mostrar();
+      lista.appendChild(item);
+    });
+  };
+
+  // 1.7 Estructuras de Datos: clases, arrays, objetos, polimorfismo
+  class Estudiante {
+    constructor(nombre, codigo, carrera, ciclo) {
+      this.nombre = nombre;
+      this.codigo = codigo;
+      this.carrera = carrera;
+      this.ciclo = ciclo;
+      this.matriculas = [];
+    }
+
+    matricular(curso) {
+      this.matriculas.push(curso);
+    }
+
+    obtenerResumen() {
+      return `${this.nombre} (${this.codigo}) tiene ${this.matriculas.length} cursos.`;
+    }
+  }
+
+  // 1.5 Manejo de Eventos y DOM
+  formulario.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value.trim();
+    const codigo = document.getElementById('codigo').value.trim();
+    const carrera = document.getElementById('carrera').value;
+    const ciclo = document.getElementById('ciclo').value;
+    const curso = campoCurso.value;
+    const horario = campoHorario.value;
+    const docente = campoDocente.value;
+
+    // Validar si ya existe un curso en el mismo horario
+    const horarioOcupado = cursosSeleccionados.some(c => c.horario === horario);
+
+    if (horarioOcupado) {
+      mensajeError.style.display = 'block';
+      campoHorario.style.border = '2px solid red';
+      alert('No se puede tener dos o más cursos en el mismo horario.');
+      return;
+    } else {
+      mensajeError.style.display = 'none';
+      campoHorario.style.border = '';
+    }
+
+    if (nombre && docente && codigo && carrera && ciclo) {
+      agregarCurso(nombre, codigo, carrera, ciclo, curso, horario, docente);
+      formulario.reset();
+      campoDocente.innerHTML = ''; // Limpiar opciones de docente después del reset
     }
   });
 
-  // Evento de scroll
-  window.addEventListener("scroll", () => {
-    console.log("Scroll detectado en la página de cursos");
+  // Evento de teclado para Enter
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const activo = document.activeElement;
+      if (activo.tagName === 'INPUT') {
+        e.preventDefault();
+      }
+    }
   });
 
-  // Evento de foco
-  document.getElementById("nombre").addEventListener("focus", () => {
-    console.log("Campo nombre enfocado");
+  // Evento de carga
+  window.addEventListener('load', () => {
+    console.log('Página de matrícula cargada correctamente');
   });
 
-  // Temporizador
+  // Temporizador de ejemplo
   setTimeout(() => {
-    console.log("Sugerencia: no olvides seleccionar un horario válido.");
+    console.log('¡Gracias por usar el simulador de matrícula!');
   }, 3000);
-};
+});
