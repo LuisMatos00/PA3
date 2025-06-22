@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Imagen Interactiva y Multimedia</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+  <header>
+    <h1>Imágenes y Multimedia</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="cursos.html">Cursos</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Uso de &lt;figure&gt; y &lt;figcaption&gt;</h2>
+    <figure>
+      <img 
+        src="imagenes/presentacion.PNG" 
+        alt="Logo interactivo" 
+        class="imagen-centrada imagen-efecto"
+      >
+      <figcaption>Estudiante de Ingeniería Informática</figcaption>
+    </figure>
+
+    <h2>Imagen interactiva con hotspot</h2>
+    <div class="contenedor-interactivo">
+      <img src="https://placehold.co/800x400/FFFFFF/000000?text=Producto+Académico+2" 
+           alt="Producto académico 2" 
+           class="imagen-centrada imagen-efecto">
+      <a href="https://view.genially.com/684500cf55275d17c4cec0ae/mobile-microlearning-la-reunion" 
+         target="_blank" 
+         class="hotspot" 
+         title="Producto Académico"></a>
+    </div>
+
+    <h2>Imagen adaptativa con &lt;picture&gt;</h2>
+    <picture>
+      <source media="(min-width:800px)" srcset="imagenes/imagen continental adaptativa.PNG">
+      <source media="(min-width:400px)" srcset="imagenes/imagen continental adaptativa.PNG">
+      <img src="imagenes/ingenieria informatica continetal.PNG" alt="Imagen adaptativa" class="imagen-centrada imagen-efecto">
+    </picture>
+
+    <p>Ejemplo de imagen responsiva e interactiva usando técnicas modernas de HTML5 y CSS3.</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sitio Web Académico</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Adaptativo y SVG</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header>
+    <h1>Adaptativo y SVG</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="cursos.html">Cursos</a>
+    </nav>
+  </header>
+
+  <main class="animado">
+    <h2>Imágenes adaptativas con &lt;picture&gt;</h2>
+    <picture>
+      <source media="(min-width: 800px)" srcset="imagenes/conti-removebg-preview.png">
+      <source media="(min-width: 400px)" srcset="imagenes/conti-removebg-preview.png">
+      <img src="imagenes/conti-removebg-preview.png" alt="Imagen Responsiva">
+    </picture>
+
+    <h2>Ejemplo de imagen SVG</h2>
+    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="80" fill="var(--color-secundario)" stroke="black" stroke-width="4"/>
+      <text x="100" y="110" font-size="20" text-anchor="middle" fill="#fff">PA2!</text>
+    </svg>
+
+    <h2>Imagen con hotspot interactivo</h2>
+    <div class="contenedor-interactivo">
+      <img src="https://placehold.co/800x400/FFFFFF/000000?text=Producto+Académico+2" alt="Aula Virtual" class="imagen-centrada imagen-efecto">
+      <a href="https://aulavirtual.continental.edu.pe/" target="_blank" class="hotspot" title="Aula Virtual"></a>
+    </div>
+
+    <h2>Tabla con animación</h2>
+    <table class="tabla-animada">
+      <thead>
+        <tr><th>Nombre</th><th>Correo</th><th>Edad</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>luis</td><td>luis@hotmail.com</td><td>28</td></tr>
+        <tr><td>matos</td><td>matos@hotmail.com</td><td>35</td></tr>
+        <tr><td>enrique</td><td>enrique@hotmail.com</td><td>22</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Formulario con animación</h2>
+    <button onclick="document.getElementById('formulario').classList.toggle('visible')">Mostrar / Ocultar Formulario</button>
+    <form id="formulario" class="formulario-animado">
+      <input type="text" placeholder="Nombre completo" required>
+      <input type="email" placeholder="Correo electrónico" required>
+      <textarea placeholder="Mensaje"></textarea>
+      <button type="submit" class="btn-animado">Enviar</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sitio Web Académico</p>
+  </footer>
+</body>
+</html>

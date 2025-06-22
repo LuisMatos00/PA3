@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CURSOS - Matrícula Interactiva</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <script defer src="js/cursos.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Simulador de Matrícula</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="adaptativo.html">Adaptativo</a>
+      <a href="datos.html">Datos</a>
+      <a href="multimedia.html">Multimedia</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>1.4 Desarrollo de la Página Web: CURSOS</h2>
+    <p>Seleccione los cursos, horarios y docentes disponibles.</p>
+
+    <section>
+      <form id="formulario-matricula">
+        <label for="nombre">Nombre del alumno:</label>
+        <input type="text" id="nombre" required>
+
+        <label for="curso">Curso:</label>
+        <select id="curso">
+          <option value="Matemática 1">Matemática 1</option>
+          <option value="Matemática 2">Matemática 2</option>
+          <option value="Programación">Programación</option>
+          <option value="Base de Datos">Base de Datos</option>
+          <option value="Física">Física</option>
+          <option value="Programación Web">Programación Web</option>
+          <option value="Estructura de Datos">Estructura de Datos</option>
+        </select>
+
+        <label for="horario">Horario:</label>
+        <select id="horario">
+          <option>8:00 - 10:00</option>
+          <option>10:00 - 12:00</option>
+          <option>14:00 - 16:00</option>
+        </select>
+
+        <label for="docente">Docente:</label>
+        <input type="text" id="docente" required>
+
+        <button type="submit">Agregar Curso</button>
+      </form>
+    </section>
+
+    <section>
+      <h3>Resumen de matrícula:</h3>
+      <ul id="lista-cursos"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sitio Web Académico</p>
+  </footer>
+</body>
+</html>
