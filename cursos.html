@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CURSOS - Matrícula Interactiva</title>
   <link rel="stylesheet" href="css/estilos.css">
@@ -19,16 +19,50 @@
   </header>
 
   <main>
-    <h2>1.4 Desarrollo de la Página Web: CURSOS</h2>
+    <h2>Desarrollo de la Página Web (CURSOS)</h2>
+     <p>Como puede  apreciar, realice un pequeño modelo de selección de cursos, ya que mi 
+        página estaba más orientada a ello, con una pequeña restriccion en caso de colocar
+        dos cursos en el mismo horario gracias por su tiempo.</p>
+<main>
     <p>Seleccione los cursos, horarios y docentes disponibles.</p>
-
-    <section>
-      <form id="formulario-matricula">
+</main>
+    <!-- Bloque 1 y 2: Formulario dividido en dos columnas -->
+    <form id="formulario-matricula" class="formulario-grid">
+      <div class="columna-form">
         <label for="nombre">Nombre del alumno:</label>
         <input type="text" id="nombre" required>
 
+        <label for="codigo">Código de estudiante:</label>
+        <input type="text" id="codigo" required>
+
+        <label for="carrera">Carrera Profesional:</label>
+        <select id="carrera" required>
+          <option>Ingeniería informática</option>
+          <option>Ingeniería mecánica</option>
+          <option>Ingeniería eléctrica</option>
+          <option>Contabilidad</option>
+          <option>Administración</option>
+          <option>Ingeniería civil</option>
+        </select>
+
+        <label for="ciclo">Ciclo:</label>
+        <select id="ciclo" required>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+        </select>
+      </div>
+
+      <div class="columna-form">
         <label for="curso">Curso:</label>
-        <select id="curso">
+        <select id="curso" required>
           <option value="Matemática 1">Matemática 1</option>
           <option value="Matemática 2">Matemática 2</option>
           <option value="Programación">Programación</option>
@@ -38,24 +72,32 @@
           <option value="Estructura de Datos">Estructura de Datos</option>
         </select>
 
+        <label for="docente">Docente:</label>
+        <select id="docente" required></select>
+
         <label for="horario">Horario:</label>
-        <select id="horario">
+        <select id="horario" required>
           <option>8:00 - 10:00</option>
           <option>10:00 - 12:00</option>
           <option>14:00 - 16:00</option>
         </select>
 
-        <label for="docente">Docente:</label>
-        <input type="text" id="docente" required>
+        <p id="mensaje-error" style="display:none; color:red;">
+          ¡Error! No se puede seleccionar más de un curso en el mismo horario.
+        </p>
 
         <button type="submit">Agregar Curso</button>
-      </form>
-    </section>
+      </div>
+    </form>
 
+
+    <!-- Bloque 3: Resumen -->
+     <main>
     <section>
       <h3>Resumen de matrícula:</h3>
       <ul id="lista-cursos"></ul>
     </section>
+     </main>
   </main>
 
   <footer>
